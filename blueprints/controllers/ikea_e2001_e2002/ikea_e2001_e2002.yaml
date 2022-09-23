@@ -407,7 +407,7 @@ action:
       last_controller_event: '{{ (states(helper_last_controller_event) | from_json).a if helper_last_controller_event is not none and (states(helper_last_controller_event) | regex_match("^\{((\"a\": \".*\"|\"t\": \d+\.\d+)(, )?){2}\}$")) else "" }}'
   # update helper
   - service: input_text.set_value
-    data:
+    service_data:
       entity_id: !input helper_last_controller_event
       value: '{{ {"a":trigger_action,"t":as_timestamp(now())} | to_json }}'
   # choose the sequence to run based on the received button event
@@ -424,7 +424,7 @@ action:
                         sequence:
                           # store the double press event in the last controller event helper
                           - service: input_text.set_value
-                            data:
+                            service_data:
                               entity_id: !input helper_last_controller_event
                               value: '{{ {"a":"double_press","t":as_timestamp(now())} | to_json }}'
                           # run the double press action
@@ -507,7 +507,7 @@ action:
                         sequence:
                           # store the double press event in the last controller event helper
                           - service: input_text.set_value
-                            data:
+                            service_data:
                               entity_id: !input helper_last_controller_event
                               value: '{{ {"a":"double_press","t":as_timestamp(now())} | to_json }}'
                           # run the double press action
@@ -590,7 +590,7 @@ action:
                         sequence:
                           # store the double press event in the last controller event helper
                           - service: input_text.set_value
-                            data:
+                            service_data:
                               entity_id: !input helper_last_controller_event
                               value: '{{ {"a":"double_press","t":as_timestamp(now())} | to_json }}'
                           # run the double press action
@@ -673,7 +673,7 @@ action:
                         sequence:
                           # store the double press event in the last controller event helper
                           - service: input_text.set_value
-                            data:
+                            service_data:
                               entity_id: !input helper_last_controller_event
                               value: '{{ {"a":"double_press","t":as_timestamp(now())} | to_json }}'
                           # run the double press action
